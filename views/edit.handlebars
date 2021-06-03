@@ -1,9 +1,10 @@
-<h1 class="mb-1 restaurant-show-title">加入新餐廳</h1>
-<form action="/restaurants" method="POST" class="col-12 mt-5 mb-3 d-flex flex-column align-items-center">
+<h1 class="mb-1 restaurant-show-title"> 修改餐廳資料</h1>
+<form action="/restaurants/{{restaurant._id}}/edit" method="POST"
+  class="col-12 mt-5 mb-3 d-flex flex-column align-items-center">
   <div class="form-group col-8">
     <label for="name" class="font-weight-bold"><i class="fas fa-store mr-3"></i>餐廳名稱</label>
     <input type="text" id="name" class="form-control" name="name" aria-describedby="name" aria-label="name"
-      placeholder="xxxxxx美食" required>
+      placeholder="xxxxxx美食" value="{{restaurant.name}}" required>
   </div>
   <div class="form-group col-8">
     <label for="category" class="font-weight-bold"><i class="fas fa-utensils mr-3"></i>餐廳類別</label>
@@ -19,36 +20,36 @@
   <div class="form-group col-8">
     <label for="image" class="font-weight-bold"><i class="fas fa-image mr-3"></i>餐廳圖片</label>
     <input type="text" id="image" class="form-control" name="image" aria-describedby="image"
-      placeholder="https://assets/uploads/image/file/0000/01.jpg" required>
+      placeholder="https://assets/uploads/image/file/0000/01.jpg" value="{{restaurant.image}}" required>
   </div>
   <div class="form-group col-8">
     <label for="location" class="font-weight-bold"><i class="fas fa-location-arrow mr-3"></i>餐廳地址</label>
     <input type="text" id="location" class="form-control" name="location" aria-describedby="location"
-      placeholder="台北市 XXX 路 X 段 X 巷 X 號" required>
+      placeholder="台北市 XXX 路 X 段 X 巷 X 號" value="{{restaurant.location}}" required>
   </div>
   <div class="form-group col-8">
     <label for="phone" class="font-weight-bold"><i class="fas fa-phone-alt mr-3"></i>餐廳電話</label>
     <input type="tel" id="phone" class="form-control" name="phone" aria-describedby="phone" placeholder="02 xxxx xxxx"
-      required>
+      value="{{restaurant.phone}}" required>
   </div>
   <div class="form-group col-8">
     <label for="google_map" class="font-weight-bold"><i class="fas fa-map-marker-alt mr-3"></i>餐廳地圖</label>
     <input type="text" id="google_map" class="form-control" name="google_map" aria-describedby="google_map"
-      placeholder="https://goo.gl/maps/xxxxxxx" required>
+      placeholder="https://goo.gl/maps/xxxxxxx" value="{{restaurant.google_map}}" required>
   </div>
   <div class="form-group col-8">
     <label for="rating" class="font-weight-bold"><i class="fas fa-star-half-alt mr-3"></i>餐廳評分</label>
     <input type="number" id="rating" min="0" max="5" step="0.1" class="form-control" name="rating"
-      aria-describedby="rating" placeholder="0.0 ~ 5.0 ex:2.5" required>
+      aria-describedby="rating" placeholder="0.0 ~ 5.0 ex:2.5" value="{{restaurant.rating}}" required>
   </div>
   <div class="form-group col-8">
     <label for="description" class="font-weight-bold"><i class="far fa-file-alt mr-3"></i>餐廳簡介</label>
     <textarea class="form-control" id="description" name="description" aria-describedby="description"
-      placeholder="............................" class="col-10" rows="6" required></textarea>
+      placeholder="............................" class="col-10" rows="6" required>{{restaurant.description}}</textarea>
   </div>
 
   <div class="d-flex justify-content-center col-12 mt-3">
     <a href="/" class="btn btn-primary" style="color:aliceblue">返回</a>
-    <button type="submit" class="btn btn-info ml-3" style="color: aliceblue;">新增</button>
+    <button type="submit" class="btn btn-info ml-3" style="color: aliceblue;">儲存</button>
   </div>
 </form>

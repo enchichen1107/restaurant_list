@@ -19,7 +19,6 @@ Fast & Simple的餐廳美食網
 1. 打開terminal，clone此專案至本機
 ```
 git clone https://github.com/enchichen1107/restaurant_list.git
-
 ```
 2. 進入存放此專案的資料夾，terminal輸入
 ```

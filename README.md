@@ -23,7 +23,7 @@ git clone https://github.com/enchichen1107/restaurant_list.git
 ```
 2. 進入存放此專案的資料夾，terminal輸入
 ```
-cd `資料夾路徑`
+cd `專案資料夾路徑`
 ```
 3. 安裝 npm 套件，terminal輸入
 ```

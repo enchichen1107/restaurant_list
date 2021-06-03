@@ -109,10 +109,17 @@ app.post('/restaurants/:id/delete', (req, res) => {
 // search restaurants
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+  Restaurant.find({
+    $or: [
+      { name: { $regex: `${keyword}`, $options: '$i' } },
+      { category: { $regex: `${keyword}`, $options: '$i' } }
+    ]
   })
-  res.render('index', { restaurants, keyword })
+    .lean()
+    .then(restaurants => {
+      res.render('index', { restaurants, keyword })
+    })
+    .catch(error => console.log(error))
 })
 
 // start and listen on the Express server

@@ -37,12 +37,12 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
-// create new restaurant-show new page
+// create new restaurant- show new page
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
 
-// create new restaurant-post data
+// create new restaurant- post data
 app.post('/restaurants', (req, res) => {
   const newRestaurant = req.body
   Restaurant.create({
@@ -60,9 +60,12 @@ app.post('/restaurants', (req, res) => {
 })
 
 // show restaurant details
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant })
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('detail', { restaurant }))
+    .catch(error => console.log(error))
 })
 
 // search restaurants

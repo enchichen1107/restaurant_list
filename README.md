@@ -24,7 +24,7 @@ git clone https://github.com/enchichen1107/restaurant_list.git
 ```
 cd `專案資料夾路徑`
 ```
-3. 安裝 npm 套件，terminal輸入
+3. npm 安裝套件，terminal輸入
 ```
 npm install 
 ```
@@ -32,13 +32,13 @@ npm install
 ```
 npm install -g nodemon
 ```
-5. 在 Terminal 找到 Seeder.js 檔案
+5. 匯入種子資料，terminal輸入
 ```
-執行 node models/seeds/restaurantSeeder.js 匯入餐廳資料
+npm run seed
 ```
-6. 執行 app.js 檔案，terminal輸入
+6. 執行檔案，terminal輸入
 ```
-nodemon app.js
+npm run dev
 ```
 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
 mongodb connected!

@@ -1,9 +1,9 @@
 {{!-- show every restaurants --}}
 <!-- search bar -->
-{{!-- <div class="d-flex justify-content-around"> --}}
-  <div class="search-bar container">
-    <div class="search-bar-outer">
-      <div class="search-bar-inner">
+<div class="search-bar container">
+  {{!-- <div class="row"> --}}
+    <div class="row search-bar-outer">
+      <div class=" col-8 search-bar-inner">
         <form class="search" action="/restaurants">
           <h4 class="mb-2">尋找餐廳：</h4>
           <div class="input-group">
@@ -15,22 +15,21 @@
           </div>
         </form>
       </div>
+      <form class="col-4 form-group sort" id="sort" action="/restaurants/sort" method="POST">
+        <select class="form-control btn-sort" id="sortForm" name="sort" onchange="this.form.submit()"
+          style="cursor: pointer;">
+          <option value="0" selected hidden>選擇排序</option>
+          <option value="nameAZ">名稱:A-Z</option>
+          <option value="nameZA">名稱:Z-A</option>
+          <option value="category">類別</option>
+          <option value="location">地區</option>
+          <option value="rating">評價:高到低</option>
+        </select>
+      </form>
     </div>
-  </div>
-
-  {{!-- <form class="form-group sort" id="sort" action="/restaurants/sort" method="POST">
-    <select class="form-control btn-sort" id="sortForm" name="sort" onchange="this.form.submit()"
-      style="cursor: pointer;">
-      <option value="0" selected hidden>選擇排序</option>
-      <option value="nameAZ">名稱:A-Z</option>
-      <option value="nameZA">名稱:Z-A</option>
-      <option value="category">類別</option>
-      <option value="location">地區</option>
-      <option value="rating">評價:高到低</option>
-    </select>
-  </form> --}}
-  {{!--
-</div> --}}
+    {{!--
+  </div> --}}
+</div>
 
 
 <!-- restaurant list -->

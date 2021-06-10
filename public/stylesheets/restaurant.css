@@ -31,13 +31,13 @@ header {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* .btn-sort{
-  margin-top: -20px; 
+.btn-sort{
+  margin-top: 34px; 
   background-color: #9b4b4b;
   color: #fce2cf;
   border: 0;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-} */
+}
 
 .search-bar .search-bar-inner h4 {
   color: #9b4b4b;

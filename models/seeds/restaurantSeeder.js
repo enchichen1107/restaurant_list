@@ -15,5 +15,5 @@ db.once('open', () => {
       description: `${store.description}`
     })
   })
-  console.log('seeder added!')
+  console.log('seeder!')
 })

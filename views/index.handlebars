@@ -4,7 +4,7 @@
   <div class="search-bar container">
     <div class="search-bar-outer">
       <div class="search-bar-inner">
-        <form action="/search">
+        <form class="search" action="/restaurants">
           <h4 class="mb-2">尋找餐廳：</h4>
           <div class="input-group">
             <input type="text" name="keyword" id="input" class="form-control" placeholder="輸入餐廳、分類"
@@ -56,7 +56,7 @@
             <div class="card-footer d-flex justify-content-end">
               <a href="/restaurants/{{ this._id }}" class="btn btn-info mr-3" style="color: aliceblue;">詳細</a>
               <a href="/restaurants/{{ this._id }}/edit" class="btn btn-info mr-3" style="color: aliceblue;">編輯</a>
-              <form action="/restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+              <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
                 <button type="submit" class="btn btn-secondary" style="color: aliceblue;">刪除</button>
               </form>
             </div>

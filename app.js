@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const app = express()
 const port = 3000
 
@@ -27,6 +28,7 @@ app.set('view engine', 'handlebars')
 // setting static files and bodyParser
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // show all restaurants
 app.get('/', (req, res) => {
@@ -77,7 +79,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // edit restaurant- post data
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const { name, category, image, location, phone, google_map, rating, description } = req.body
   return Restaurant.findById(id)
@@ -97,7 +99,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // delete restaurant
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
@@ -106,14 +108,10 @@ app.post('/restaurants/:id/delete', (req, res) => {
 })
 
 // search restaurants
-app.get('/search', (req, res) => {
+app.get('/restaurants', (req, res) => {
   const keyword = req.query.keyword.trim()
-  Restaurant.find({
-    $or: [
-      { name: { $regex: `${keyword}`, $options: '$i' } },
-      { category: { $regex: `${keyword}`, $options: '$i' } }
-    ]
-  })
+  const regex = new RegExp(keyword, 'i')
+  Restaurant.find({ $or: [{ name: { $regex: regex } }, { category: { $regex: regex } }] })
     .lean()
     .then(restaurants => {
       res.render('index', { restaurants, keyword })

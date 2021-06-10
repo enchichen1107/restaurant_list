@@ -1,16 +1,8 @@
-// init package and data
-const mongoose = require('mongoose')
+const db = require('../../config/mongoose')
 const Restaurant = require('../restaurant')
 const restaurantList = require('../../restaurant.json')
 
-// connect to mongoDB and generate seeder
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('mongodb error!')
-})
 db.once('open', () => {
-  console.log('mongodb connected!')
   restaurantList.results.forEach(store => {
     Restaurant.create({
       name: `${store.name}`,
@@ -23,4 +15,5 @@ db.once('open', () => {
       description: `${store.description}`
     })
   })
+  console.log('seeder added!')
 })

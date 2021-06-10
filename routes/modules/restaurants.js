@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
+
 // create new restaurant- show new page
 router.get('/new', (req, res) => {
   return res.render('new')
@@ -71,8 +72,8 @@ router.delete('/:id', (req, res) => {
 })
 
 // search restaurants
-router.get('/', (req, res) => {
-  const keyword = req.query.keyword.trim()
+router.post('/search', (req, res) => {
+  const keyword = req.body.keyword.trim()
   const regex = new RegExp(keyword, 'i')
   Restaurant.find({ $or: [{ name: { $regex: regex } }, { category: { $regex: regex } }] })
     .lean()
@@ -81,4 +82,17 @@ router.get('/', (req, res) => {
     })
     .catch(error => console.log(error))
 })
+
+// sort restaurants
+router.post('/sort', (req, res) => {
+  const sortMethod = req.body.sort
+  Restaurant.find()
+    .lean()
+    .sort(sortMethod)
+    .then(restaurants => {
+      res.render('index', { restaurants, sortMethod })
+    })
+    .catch(error => console.log(error))
+})
+
 module.exports = router

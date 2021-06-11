@@ -1,14 +1,14 @@
-// 引用 Express 與 Express 路由器
+// add Express and Express router
 const express = require('express')
 const router = express.Router()
-// 引用 Todo model
+// add Restaurant model
 const Restaurant = require('../../models/restaurant')
-// 定義首頁路由
+// define home page router
 router.get('/', (req, res) => {
   Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
 })
-// 匯出路由模組
+// export router
 module.exports = router

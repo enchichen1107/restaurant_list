@@ -18,12 +18,12 @@
       <form class="col-4 form-group sort" id="sort" action="/restaurants/sort" method="POST">
         <select class="form-control btn-sort" id="sortForm" name="sort" onchange="this.form.submit()"
           style="cursor: pointer;">
-          <option value="0" selected hidden>選擇排序</option>
-          <option value="name">名稱:A-Z</option>
-          <option value="-name">名稱:Z-A</option>
-          <option value="category">類別</option>
-          <option value="location">地區</option>
-          <option value="-rating">評價:高到低</option>
+          <option value="0" selected disabled>選擇排序</option>
+          <option value="name" {{#if (eq sortMethod 'name' )}}selected{{/if}}>名稱:A-Z</option>
+          <option value="-name" {{#if (eq sortMethod '-name' )}}selected{{/if}}>名稱:Z-A</option>
+          <option value="category" {{#if (eq sortMethod 'category' )}}selected{{/if}}>類別</option>
+          <option value="location" {{#if (eq sortMethod 'location' )}}selected{{/if}}>地區</option>
+          <option value="-rating" {{#if (eq sortMethod '-rating' )}}selected{{/if}}>評價:高到低</option>
         </select>
       </form>
     </div>

@@ -56,8 +56,7 @@ router.delete('/:id', (req, res) => {
 // search restaurants
 router.post('/search', (req, res) => {
   const keyword = req.body.keyword.trim()
-  const regex = new RegExp(keyword, 'i')
-  Restaurant.find({ $or: [{ name: { $regex: regex } }, { category: { $regex: regex } }] })
+  Restaurant.find({ $or: [{ name: { $regex: keyword, $options: 'i' } }, { category: { $regex: keyword, $options: 'i' } }] })
     .lean()
     .then(restaurants => {
       res.render('index', { restaurants, keyword })

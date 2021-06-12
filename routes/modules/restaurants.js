@@ -3,6 +3,17 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
+// search restaurants
+router.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim()
+  return Restaurant.find({ $or: [{ name: { $regex: keyword, $options: 'i' } }, { category: { $regex: keyword, $options: 'i' } }] })
+    .lean()
+    .then(restaurants => {
+      res.render('index', { restaurants, keyword })
+    })
+    .catch(error => console.log(error))
+})
+
 // create new restaurant- show new page
 router.get('/new', (req, res) => {
   return res.render('new')
@@ -10,7 +21,7 @@ router.get('/new', (req, res) => {
 
 // create new restaurant- post data
 router.post('/', (req, res) => {
-  Restaurant.create(req.body)
+  return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -54,21 +65,10 @@ router.delete('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// search restaurants
-router.post('/search', (req, res) => {
-  const keyword = req.body.keyword.trim()
-  Restaurant.find({ $or: [{ name: { $regex: keyword, $options: 'i' } }, { category: { $regex: keyword, $options: 'i' } }] })
-    .lean()
-    .then(restaurants => {
-      res.render('index', { restaurants, keyword })
-    })
-    .catch(error => console.log(error))
-})
-
 // sort restaurants
 router.post('/sort', (req, res) => {
   const sortMethod = req.body.sort
-  Restaurant.find()
+  return Restaurant.find()
     .lean()
     .sort(sortMethod)
     .then(restaurants => {

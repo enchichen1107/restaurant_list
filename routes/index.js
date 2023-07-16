@@ -1,25 +1,17 @@
-// add Express and Express router
+// init Express and Express router
 const express = require('express')
 const router = express.Router()
 
-// add router modules
-// add home module
+// init router modules
 const home = require('./modules/home')
-
-// if request url matches '/', direct to home module
-router.use('/', home)
-
-// add restaurants module
 const restaurants = require('./modules/restaurants')
-
-// if request url matches '/restaurants' , direct to restaurant module
-router.use('/restaurants', restaurants)
-
-// add users module
 const users = require('./modules/users')
+const { authenticator } = require('../middleware/auth')  // 掛載 middleware
 
-// if request url matches '/users' , direct to user module
+// use router
+router.use('/restaurants', authenticator, restaurants)
 router.use('/users', users)
+router.use('/', authenticator, home)
 
 // export router
 module.exports = router

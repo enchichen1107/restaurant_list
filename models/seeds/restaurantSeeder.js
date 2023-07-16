@@ -1,13 +1,14 @@
 // init setting
-const db = require('../../config/mongoose')
-const Restaurant = require('../restaurant')
-const User = require('../user')
-const restaurantList = require('../../restaurant.json')
-const seedUsers = require('./user.json')
 const bcrypt = require('bcryptjs')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+const db = require('../../config/mongoose')
+const Restaurant = require('../restaurant')
+const User = require('../user')
+const restaurantList = require('./restaurant.json').results
+const seedUsers = require('./user.json')
+
 // add seed data
 db.once('open', () => {
   Promise.all(

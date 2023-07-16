@@ -1,5 +1,6 @@
 # Restaurant List
 Fast & Simple的餐廳美食網
+![restaurant final cover](https://github.com/enchichen1107/restaurant_list/blob/main/restaurant-final.png)
 
 ## Features
 1. 使用者可以在首頁查看所有餐廳的簡易資料

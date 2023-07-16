@@ -15,5 +15,11 @@ const restaurants = require('./modules/restaurants')
 // if request url matches '/restaurants' , direct to restaurant module
 router.use('/restaurants', restaurants)
 
+// add users module
+const users = require('./modules/users')
+
+// if request url matches '/users' , direct to user module
+router.use('/users', users)
+
 // export router
 module.exports = router

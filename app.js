@@ -11,24 +11,31 @@ require('handlebars-helpers')()
 const app = express()
 const port = 3000
 
-// setting template engine
+// set template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-// setting express session
+// set express session
 app.use(session({
   secret: 'ThisIsMySecret',
   resave: false,
   saveUninitialized: true
 }))
 
-// setting static files and bodyParser
+// set static files and bodyParser
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
-
+//set authentication
 usePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
+// use routes
 app.use(routes)
 
 // start and listen on the Express server

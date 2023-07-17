@@ -20,11 +20,6 @@ router.get('/new', (req, res) => {
 })
 
 // create new restaurant- post data
-// router.post('/', (req, res) => {
-//   return Restaurant.create(req.body)
-//     .then(() => res.redirect('/'))
-//     .catch(error => console.log(error))
-// })
 router.post('/', (req, res) => {
   const userId = req.user._id
   const { name, category, image, location, phone, google_map, rating, description } = req.body

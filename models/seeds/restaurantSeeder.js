@@ -8,6 +8,7 @@ const Restaurant = require('../restaurant')
 const User = require('../user')
 const restaurantList = require('./restaurant.json').results
 const seedUsers = require('./user.json')
+const addedRestaurant = []
 
 // add seed data
 db.once('open', () => {
@@ -24,16 +25,25 @@ db.once('open', () => {
           })
             .catch(err => console.log(err))
         })
+
         .then(user => {
-          const userRestaurants = seedUser.userRestaurants.map(item => {
+
+          const restaurantResult = seedUser.userRestaurants.filter(item => !addedRestaurant.includes(item))
+          const userRestaurants = restaurantResult.map(item => {
+            addedRestaurant.push(item)
             return Object.assign(restaurantList[item - 1], { userId: user._id })
           })
           return userRestaurants
+
         })
 
         .then(userRestaurants => {
-          return Restaurant.create(userRestaurants)
-            .catch(err => console.log(err))
+
+          if (userRestaurants) {
+            return Restaurant.create(userRestaurants)
+              .catch(err => console.log(err))
+          }
+
         })
     })
   )
